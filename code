@@ -1,0 +1,87 @@
+#include <Wire.h>
+#include <MPU6050.h>
+#include <SoftwareSerial.h>
+
+MPU6050 mpu;
+SoftwareSerial gsm(10, 11); // D10 = RX, D11 = TX
+
+const int buzzerPin = 8;
+const int resetButtonPin = 7;
+
+bool fallDetected = false;
+bool smsSent = false;
+
+void setup() {
+  Serial.begin(9600);
+  gsm.begin(9600);
+  Wire.begin();
+
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(resetButtonPin, INPUT_PULLUP);
+
+  mpu.initialize();
+  if (!mpu.testConnection()) {
+    Serial.println(" MPU6050 not connected!");
+    while (1); // stop code
+  }
+
+  Serial.println(" MPU6050 ready. System is on.");
+  delay(1000);
+  sendSMS(" GSM SIM900A Fall Detection System Activated.");
+}
+
+void loop() {
+  if (digitalRead(resetButtonPin) == LOW) {
+    fallDetected = false;
+    smsSent = false;
+    digitalWrite(buzzerPin, LOW);
+    Serial.println(" Reset done.");
+    delay(500);
+  }
+
+  if (!fallDetected) {
+    int16_t ax, ay, az;
+    mpu.getAcceleration(&ax, &ay, &az);
+
+    float aX = ax / 16384.0;
+    float aY = ay / 16384.0;
+    float aZ = az / 16384.0;
+
+    float totalAccel = sqrt(aX * aX + aY * aY + aZ * aZ);
+    if (totalAccel == 0) return;
+
+    float angle = acos(aZ / totalAccel) * (180.0 / PI);
+
+    Serial.print("Accel: ");
+    Serial.print(totalAccel, 2);
+    Serial.print(" g | Angle: ");
+    Serial.print(angle, 1);
+    Serial.println(".....");
+
+    if (totalAccel > 1.5 && angle >100.0) {
+      fallDetected = true;
+      digitalWrite(buzzerPin, HIGH);
+      Serial.println("Fall detected!");
+
+      if (!smsSent) {
+        sendSMS("Fall Detected! Please check now.");
+        smsSent = true;
+      }
+    }
+  }
+
+  delay(2000);
+}
+
+void sendSMS(String msg) {
+  gsm.println("AT");
+  delay(1000);
+  gsm.println("AT+CMGF=1"); // Set SMS mode
+  delay(1000);
+  gsm.println("AT+CMGS=\"+917993867711\""); // ← Your phone number here
+  delay(1000);
+  gsm.print("Person Fallen down");
+  gsm.write(26); // Ctrl+Z to send
+  delay(2000);
+  Serial.println("SMS sent: " + msg);
+}
