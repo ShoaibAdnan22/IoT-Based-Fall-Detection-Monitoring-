@@ -3,3 +3,10 @@ IoT Based Fall Detection Monitoring System – Designed an Arduino-powered syste
 This system is designed to laboriously cover physical movements and the body's body exposure in real time. It uses the MPU6050 detector, which combines a 3- axle accelerometer and a 3- axis gyroscope to continuously track the movement. These movement patterns are also anatomized by the Arduino Uno microcontroller. When the system detects a unforeseen acceleration peak and a change in body exposure- two crash- cash pointers it triggers an alarm through a bell and contemporaneously sends a textbook alert to a phone number recorded through the Sim800L GSM module. This approach ensures that the senior admit time help, indeed if there's no bone physically around to substantiation the incident. 
  
  What makes this design especially useful is its independence of internet connectivity. Unlike other IoT systems that depend on Wi- Fi or mobile operations, our GSM- grounded design works efficiently, indeed in remote areas with limited structure. The alert system is immediate, dependable and simple to configure, making it a great adaptation for pastoral families and civic houses. In addition, the integration of a redefinition button allows the stoner or caregiver to manually intrude the alarm in case of a fake detector, perfecting stoner control and reducing gratuitous fear. 
+Block Diagram:
+<img width="1639" height="945" alt="image" src="https://github.com/user-attachments/assets/7ae2e678-720a-4047-b411-156ddb9d054e" />
+
+
+
+Flow Chart:
+<img width="1796" height="1070" alt="image" src="https://github.com/user-attachments/assets/fa34d074-b3c5-464d-8db3-032b2953065e" />
