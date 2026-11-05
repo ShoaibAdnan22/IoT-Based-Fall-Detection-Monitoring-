@@ -4,9 +4,11 @@ This system is designed to laboriously cover physical movements and the body's b
  
  What makes this design especially useful is its independence of internet connectivity. Unlike other IoT systems that depend on Wi- Fi or mobile operations, our GSM- grounded design works efficiently, indeed in remote areas with limited structure. The alert system is immediate, dependable and simple to configure, making it a great adaptation for pastoral families and civic houses. In addition, the integration of a redefinition button allows the stoner or caregiver to manually intrude the alarm in case of a fake detector, perfecting stoner control and reducing gratuitous fear. 
 Block Diagram:
-<img width="1639" height="945" alt="image" src="https://github.com/user-attachments/assets/7ae2e678-720a-4047-b411-156ddb9d054e" />
+<img width="1558" height="880" alt="Screenshot 2026-11-05 220853" src="https://github.com/user-attachments/assets/d821ab2b-c6d0-40d3-a8e5-d27388513622" />
+
 
 
 
 Flow Chart:
-<img width="1796" height="1070" alt="image" src="https://github.com/user-attachments/assets/fa34d074-b3c5-464d-8db3-032b2953065e" />
+<img width="1560" height="902" alt="Screenshot 2026-11-05 220816" src="https://github.com/user-attachments/assets/a9fffded-1cf0-420b-a5d6-3c87378d7484" />
+
